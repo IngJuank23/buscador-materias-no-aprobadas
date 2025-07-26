@@ -1,115 +1,155 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disponibilidad de Materias</title>
-    <style>
-        body {
-            background-color: #000;
-            color: #00ff00;
-            font-family: Consolas, monospace;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .search-box {
-            margin: 20px auto;
-        }
-        textarea {
-            width: 80%;
-            height: 100px;
-            background: #111;
-            color: #00ff00;
-            border: 2px solid #00ff00;
-            padding: 10px;
-        }
-        button {
-            background-color: #000;
-            border: 2px solid #00ff00;
-            color: #00ff00;
-            padding: 10px 20px;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        .sections {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-        .section {
-            flex: 1;
-            min-width: 250px;
-            border: 2px solid #00ff00;
-            padding: 15px;
-            background: #111;
-        }
-        .footer {
-            margin-top: 50px;
-            font-size: 12px;
-            color: #aaa;
-        }
-        .section h2 {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .emoji {
-            font-size: 18px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disponibilidad de Materias</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #0f0;
+      font-family: monospace;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 20px;
+      font-size: 24px;
+      color: #00ff00;
+    }
+    .search-box {
+      margin: 20px auto;
+      width: 70%;
+      max-width: 600px;
+      background-color: #111;
+      border: 2px solid #0f0;
+      padding: 15px;
+    }
+    textarea {
+      width: 100%;
+      height: 70px;
+      background-color: #111;
+      color: #0f0;
+      border: 1px solid #0f0;
+      resize: none;
+    }
+    button {
+      margin-top: 10px;
+      background-color: black;
+      color: lime;
+      border: 2px solid lime;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .evaluation-section {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin: 30px auto;
+      max-width: 1200px;
+    }
+    .evaluation-box {
+      width: 30%;
+      margin: 10px;
+      text-align: left;
+    }
+    h2 {
+      text-align: center;
+      text-decoration: underline;
+      margin-bottom: 10px;
+    }
+    footer {
+      margin-top: 40px;
+      color: #0f0;
+      font-size: 14px;
+      white-space: pre-line;
+    }
+  </style>
 </head>
 <body>
-    <h1>⬤ Disponibilidad de Materias <br>(Búsqueda Max. 20):</h1>
-    <div class="search-box">
-        <textarea placeholder="Ejemplo: Auditoría II\nTópicos fiscales"></textarea><br>
-        <button>🔍 Buscar</button>
+  <h1>
+    🟢 Disponibilidad de Materias <br> (Búsqueda Max. 20):
+  </h1>
+  <div class="search-box">
+    <textarea id="materias" placeholder="Ejemplo: Auditoría II\nTópicos fiscales"></textarea><br>
+    <button onclick="buscarMaterias()">
+      🔍 Buscar
+    </button>
+  </div>
+
+  <div class="evaluation-section">
+    <div class="evaluation-box">
+      <h2>Evaluación Licenciatura</h2>
+      <p>📢 La forma de evaluación para tus materias es sencilla y consta de 3 actividades: 📝✨</p>
+      <p>📝 Evaluación del Curso – 3 Actividades 📝</p>
+      <ul>
+        <li>📌 1. Guía Académica (40%)
+          <ul>
+            <li>🔹 20 preguntas con base en los materiales.</li>
+            <li>🔹 Archivo Word ya formulado.</li>
+          </ul>
+        </li>
+        <li>📌 2. Examen (40%)
+          <ul>
+            <li>🔹 10 preguntas de opción múltiple.</li>
+          </ul>
+        </li>
+        <li>📌 3. Resumen Open Class (20%)
+          <ul>
+            <li>🔹 Mira la clase y haz un resumen.</li>
+          </ul>
+        </li>
+      </ul>
     </div>
 
-    <div class="sections">
-        <div class="section">
-            <h2>Evaluación Licenciatura</h2>
-            <p class="emoji">📢 La forma de evaluación para tus materias es sencilla y consta de 3 actividades: 📝✨
-            </p>
-            <p>📝 Evaluación del Curso – 3 Actividades</p>
-            <p>📌 1. Guía Académica (40%)<br>
-               🔹 20 preguntas con base en los materiales.<br>
-               🔹 Archivo Word ya formulado.</p>
-            <p>📌 2. Examen (40%)<br>
-               🔹 10 preguntas de opción múltiple.</p>
-            <p>📌 3. Resumen Open Class (20%)<br>
-               🔹 Mira la clase y haz un resumen.</p>
-            <p>✅ ¡Así de fácil!</p>
-        </div>
-        <div class="section">
-            <h2>Autogestionables Licenciatura</h2>
-            <p>📝 Forma de Evaluación</p>
-            <p>✅ 10 preguntas de opción múltiple.<br>
-               🎯 Valor: 100% de la nota.<br>
-               🚀 Fácil, rápido y sin complicaciones.</p>
-            <p>¡Aprueba gestionando tu avance! 📚✨</p>
-        </div>
-        <div class="section">
-            <h2>Evaluación Maestría</h2>
-            <p class="emoji">📢 Evaluación mediante 3 actividades: 📝✨</p>
-            <p>📝 Evaluación del Curso</p>
-            <p>📌 1. Guía del Caso (40%)<br>
-               🔹 5 preguntas argumentativas.</p>
-            <p>📌 2. Análisis de Caso (40%)<br>
-               🔹 4 preguntas con tu análisis personal.</p>
-            <p>📌 3. Autocalificables (20%)<br>
-               🔹 5 preguntas de opción múltiple.</p>
-            <p>✅ ¡Completa tu evaluación sin complicaciones!</p>
-        </div>
+    <div class="evaluation-box">
+      <h2>Autogestionables Licenciatura</h2>
+      <p>📝 Forma de Evaluación</p>
+      <ul>
+        <li>✅ 10 preguntas de opción múltiple.</li>
+        <li>🎯 Valor: 100% de la nota.</li>
+        <li>🚀 Fácil, rápido y sin complicaciones.</li>
+      </ul>
     </div>
 
-    <div class="footer">
-        Sistema Interno de Nivelación | UTEL | &copy; 2025 | Desarrollado por JuanPariona
+    <div class="evaluation-box">
+      <h2>Evaluación Maestría y Máster</h2>
+      <p>📢 Evaluación mediante 3 actividades: 📝✨</p>
+      <p>📝 Evaluación del Curso</p>
+      <ul>
+        <li>📌 1. Guía del Caso (40%)
+          <ul>
+            <li>🔹 5 preguntas argumentativas.</li>
+          </ul>
+        </li>
+        <li>📌 2. Análisis de Caso (40%)
+          <ul>
+            <li>🔹 4 preguntas con tu análisis personal.</li>
+          </ul>
+        </li>
+        <li>📌 3. Autocalificables (20%)
+          <ul>
+            <li>🔹 5 preguntas de opción múltiple.</li>
+          </ul>
+        </li>
+      </ul>
     </div>
+  </div>
+
+  <footer>
+Sistema Interno de Nivelación | UTEL💚 | © 2025 │
+│ Desarrollado por JuanPariona
+  </footer>
+
+  <script>
+    function buscarMaterias() {
+      const materias = document.getElementById('materias').value.trim();
+      if (!materias) {
+        alert('Ingresa al menos una materia');
+        return;
+      }
+      alert("Simulación de búsqueda para:\n" + materias);
+    }
+  </script>
 </body>
 </html>
