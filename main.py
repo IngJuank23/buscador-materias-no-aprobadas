@@ -806,12 +806,13 @@ def index():
                     encontrado = True
                     break
 
-        if not encontrado:
-            resultados.append({
-                'nombre': entrada.strip().title(),
-                'clave': '',
-                'nivelacion': ''
-            })
+            # 👇 Este bloque debe ir dentro del for entrada
+            if not encontrado:
+                resultados.append({
+                    'nombre': entrada.strip().title(),
+                    'clave': '',
+                    'nivelacion': ''
+                })
 
         if not resultados:
             mensaje = "No se ingresaron materias válidas."
