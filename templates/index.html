@@ -85,14 +85,20 @@
   <div class="container">
     <h1 style="text-align:center">🔵 Disponibilidad de Materias<br>(Búsqueda Max. 20):</h1>
     <form method="POST">
-      <textarea name="materias" placeholder="Ejemplo: Auditoría II&#10;Tópicos fiscales" required></textarea><br>
+      <textarea id="materias" name="materias" placeholder="Ejemplo: Auditoría II&#10;Tópicos fiscales" required></textarea><br>
       <button type="submit">🔍 Buscar</button>
     </form>
 
     {% if resultados %}
       <ul>
         {% for r in resultados %}
-          <li><strong>{{ r.nombre }}</strong> ({{ r.clave }}) – Nivelación por {{ r.nivelacion }}</li>
+          <li>
+            {% if r.clave and r.nivelacion %}
+              <strong>{{ r.nombre }}</strong> ({{ r.clave }}) – Nivelación por {{ r.nivelacion }}
+            {% else %}
+              <strong>{{ r.nombre }}</strong>
+            {% endif %}
+          </li>
         {% endfor %}
       </ul>
     {% elif mensaje %}
@@ -103,5 +109,17 @@
       Sistema Interno de Nivelación | UTEL💚 | © 2025 │ Desarrollado por JuanPariona
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const textarea = document.getElementById('materias');
+      textarea.addEventListener('keydown', function (e) {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          this.form.submit();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
