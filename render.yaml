@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: buscador-materias-na
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn main:app"
