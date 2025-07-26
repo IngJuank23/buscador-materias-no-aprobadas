@@ -806,10 +806,10 @@ def index():
                     encontrado = True
                     break
 
-            if not encontrado:
-             resultados.append({
-             'nombre': "Materia no construida para nivelación",
-           'clave': '',
+        if not encontrado:
+    resultados.append({
+        'nombre': entrada.strip().title(),
+        'clave': '',
         'nivelacion': ''
     })
 
