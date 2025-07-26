@@ -807,11 +807,11 @@ def index():
                     break
 
         if not encontrado:
-    resultados.append({
-        'nombre': entrada.strip().title(),
-        'clave': '',
-        'nivelacion': ''
-    })
+            resultados.append({
+                'nombre': entrada.strip().title(),
+                'clave': '',
+                'nivelacion': ''
+            })
 
         if not resultados:
             mensaje = "No se ingresaron materias válidas."
