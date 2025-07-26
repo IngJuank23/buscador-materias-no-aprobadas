@@ -177,7 +177,7 @@ materias = {
     "L1AET117": {"nombre": "Estructura de establecimientos de hospedaje", "nivelacion": "actividades"},
     "L1AET115": {"nombre": "Legislación turística", "nivelacion": "actividades"},
     "L1AV107": {"nombre": "Mercadotecnia integral y estratégica", "nivelacion": "actividades"},
-    "L1MK110": {"nombre": "	Mercadotecnia para organizaciones no lucrativas", "nivelacion": "actividades"},
+    "L1MK110": {"nombre": "Mercadotecnia para organizaciones no lucrativas", "nivelacion": "actividades"},
     "L1CPA105": {"nombre": "Teoría de la administración pública", "nivelacion": "actividades"},
     "L1CPA112": {"nombre": "Teoría general de sistemas", "nivelacion": "actividades"},
     "L2DE117": {"nombre": "Derecho administrativo I", "nivelacion": "actividades"},
@@ -780,32 +780,43 @@ materias_por_nombre = {
     for k, v in materias.items()
 }
 
-@app.route("/", methods=["GET", "POST"])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     resultados = []
-    if request.method == "POST":
-        texto = request.form.get("materias")
-        lineas = texto.strip().splitlines()
+    mensaje = ""
+    
+    if request.method == 'POST':
+        texto = request.form['materias']
+        lineas = texto.strip().split('\n')
 
-        for linea in lineas:
-            nombre_ingresado = linea.strip()
-            nombre_limpio = unidecode(nombre_ingresado.lower())
+        for entrada in lineas:
+            entrada_normalizada = unidecode(entrada.strip().lower())
+            if not entrada_normalizada:
+                continue
 
-            if nombre_limpio in materias_por_nombre:
-                datos = materias_por_nombre[nombre_limpio]
-                resultados.append({
-                    "nombre": nombre_ingresado,
-                    "clave": datos["clave"],
-                    "nivelacion": datos["nivelacion"]
-                })
-            else:
-                resultados.append({
-                    "nombre": nombre_ingresado,
-                    "clave": "No encontrada",
-                    "nivelacion": "-"
-                })
+            encontrado = False
+            for clave, datos in materias.items():
+                nombre_normalizado = unidecode(datos['nombre'].lower())
+                if nombre_normalizado == entrada_normalizada:
+                    resultados.append({
+                        'nombre': datos['nombre'],
+                        'clave': clave,
+                        'nivelacion': datos['nivelacion']
+                    })
+                    encontrado = True
+                    break
 
-    return render_template("index.html", resultados=resultados)
+            if not encontrado:
+             resultados.append({
+             'nombre': "Materia no construida para nivelación",
+           'clave': '',
+        'nivelacion': ''
+    })
+
+        if not resultados:
+            mensaje = "No se ingresaron materias válidas."
+
+    return render_template('index.html', resultados=resultados, mensaje=mensaje)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000)
