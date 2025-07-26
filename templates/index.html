@@ -28,6 +28,12 @@
 
     h1 {
       font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .shortcuts-headnote {
+      font-size: 14px;
+      color: #00FF00;
       margin-bottom: 20px;
     }
 
@@ -57,6 +63,12 @@
       color: #000;
     }
 
+    .shortcuts {
+      font-size: 14px;
+      color: #00FF00;
+      margin-top: 10px;
+    }
+
     ul {
       margin-top: 20px;
       list-style-type: none;
@@ -84,6 +96,7 @@
 <body>
   <div class="container">
     <h1 style="text-align:center">🔵 Disponibilidad de Materias<br>(Búsqueda Max. 20):</h1>
+    <div class="shortcuts-headnote">Enter → Buscar | Shift + Enter → Nueva línea | Ctrl + Enter → Buscar (alternativo)</div>
     <form method="POST">
       <textarea id="materias" name="materias" placeholder="Ejemplo: Auditoría II&#10;Tópicos fiscales" required></textarea><br>
       <button type="submit">🔍 Buscar</button>
