@@ -96,7 +96,7 @@
             {% if r.clave and r.nivelacion %}
               <strong>{{ r.nombre }}</strong> ({{ r.clave }}) – Nivelación por {{ r.nivelacion }}
             {% else %}
-              <strong>{{ r.nombre }}</strong>
+              <strong>{{ r.nombre }}</strong> – Materia no construida para nivelación
             {% endif %}
           </li>
         {% endfor %}
@@ -114,7 +114,7 @@
     document.addEventListener('DOMContentLoaded', function () {
       const textarea = document.getElementById('materias');
       textarea.addEventListener('keydown', function (e) {
-        if (e.ctrlKey && e.key === 'Enter') {
+        if ((e.ctrlKey && e.key === 'Enter') || (e.key === 'Enter' && !e.shiftKey)) {
           e.preventDefault();
           this.form.submit();
         }
