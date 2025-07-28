@@ -784,7 +784,23 @@ materias_por_nombre = {
 def index():
     resultados = []
     mensaje = ""
-    
+
+    # 🧮 Contador de visitas
+    try:
+        if not os.path.exists("visitas.txt"):
+            with open("visitas.txt", "w") as f:
+                f.write("0")
+
+        with open("visitas.txt", "r") as f:
+            contador = int(f.read())
+
+        contador += 1
+
+        with open("visitas.txt", "w") as f:
+            f.write(str(contador))
+    except Exception:
+        contador = "?"
+
     if request.method == 'POST':
         texto = request.form['materias']
         lineas = texto.strip().split('\n')
@@ -817,7 +833,8 @@ def index():
         if not resultados:
             mensaje = "No se ingresaron materias válidas."
 
-    return render_template('index.html', resultados=resultados, mensaje=mensaje)
+    return render_template('index.html', resultados=resultados, mensaje=mensaje, contador=contador)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000)
+
