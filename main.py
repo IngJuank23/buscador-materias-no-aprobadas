@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from unidecode import unidecode
+import sqlite3
 
 app = Flask(__name__)
 
@@ -785,20 +786,26 @@ def index():
     resultados = []
     mensaje = ""
 
-    # 🧮 Contador de visitas
+    # 🧮 Contador de visitas usando SQLite
     try:
-        if not os.path.exists("visitas.txt"):
-            with open("visitas.txt", "w") as f:
-                f.write("0")
+        conn = sqlite3.connect("visitas.db")
+        cursor = conn.cursor()
 
-        with open("visitas.txt", "r") as f:
-            contador = int(f.read())
+        cursor.execute("SELECT contador FROM visitas LIMIT 1")
+        row = cursor.fetchone()
 
-        contador += 1
+        if row:
+            contador = row[0] + 1
+            cursor.execute("UPDATE visitas SET contador = ?", (contador,))
+        else:
+            contador = 1
+            cursor.execute("INSERT INTO visitas (contador) VALUES (?)", (contador,))
 
-        with open("visitas.txt", "w") as f:
-            f.write(str(contador))
-    except Exception:
+        conn.commit()
+        conn.close()
+
+    except Exception as e:
+        print("Error en contador de visitas:", e)
         contador = "?"
 
     if request.method == 'POST':
@@ -822,7 +829,6 @@ def index():
                     encontrado = True
                     break
 
-            # 👇 Este bloque debe ir dentro del for entrada
             if not encontrado:
                 resultados.append({
                     'nombre': entrada.strip().title(),
@@ -837,4 +843,3 @@ def index():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000)
-
