@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Disponibilidad de Materias</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #000;
+      font-family: 'Courier New', Courier, monospace;
+      color: #00FF00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 700px;
+      width: 90%;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .shortcuts-headnote {
+      font-size: 14px;
+      color: #00FF00;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      background-color: #111;
+      color: #00FF00;
+      border: 2px solid #00FF00;
+      padding: 10px;
+      font-size: 16px;
+      resize: none;
+    }
+
+    button {
+      background-color: #000;
+      color: #00FF00;
+      border: 2px solid #00FF00;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #00FF00;
+      color: #000;
+    }
+
+    .shortcuts {
+      font-size: 14px;
+      color: #00FF00;
+      margin-top: 10px;
+    }
+
+    ul {
+      margin-top: 20px;
+      list-style-type: none;
+      padding-left: 0;
+      text-align: left;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: #00FF00;
+    }
+
+    .error {
+      color: red;
+      margin-top: 20px;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    .visit-counter {
+      font-size: 13px;
+      color: #00FF00;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 style="text-align:center">🔵 Disponibilidad de Materias<br>(Búsqueda Max. 20):</h1>
+    <div class="shortcuts-headnote">Enter → Buscar | Shift + Enter → Nueva línea | Ctrl + Enter → Buscar</div>
+    <form method="POST">
+      <textarea id="materias" name="materias" placeholder="Ejemplo: Auditoría II&#10;Tópicos fiscales" required></textarea><br>
+      <button type="submit">🔍 Buscar</button>
+    </form>
+
+    {% if resultados %}
+      <ul>
+        {% for r in resultados %}
+          <li>
+            {% if r.clave and r.nivelacion %}
+              <strong>{{ r.nombre }}</strong> ({{ r.clave }}) – Nivelación por {{ r.nivelacion }}
+            {% else %}
+              <strong>{{ r.nombre }}</strong> – Materia no construida para nivelación
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% elif mensaje %}
+      <p class="error">{{ mensaje }}</p>
+    {% endif %}
+
+    <div class="footer">
+      Sistema Interno de Nivelación | UTEL💚 | © 2025 │ Desarrollado por JuanPariona
+    </div>
+
+    <br><br>
+    <div class="visit-counter">
+      Total de visitas a esta página: <strong>{{ contador }}</strong>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const textarea = document.getElementById('materias');
+      textarea.addEventListener('keydown', function (e) {
+        if ((e.ctrlKey && e.key === 'Enter') || (e.key === 'Enter' && !e.shiftKey)) {
+          e.preventDefault();
+          this.form.submit();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
