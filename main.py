@@ -334,7 +334,7 @@ materias = {
     "L1CPA113": {"nombre": "Administración pública (federal, estatal y municipal)", "nivelacion": "examen (10 preguntas)"},
     "L1C110": {"nombre": "Álgebra lineal", "nivelacion": "examen (10 preguntas)"},
     "L1C109": {"nombre": "Álgebra superior", "nivelacion": "examen (10 preguntas)"},
-    "L1CO106": {"nombre": "Análisis e interpretación de estados financieros	", "nivelacion": "examen (10 preguntas)"},
+    "L1CO106": {"nombre": "Análisis e interpretación de estados financieros", "nivelacion": "examen (10 preguntas)"},
     "L1IS108": {"nombre": "Análisis y diseño de sistemas", "nivelacion": "examen (10 preguntas)"},
     "L1PS101": {"nombre": "Bases biológicas del comportamiento", "nivelacion": "examen (10 preguntas)"},
     "L1IS106": {"nombre": "Bases de datos", "nivelacion": "examen (10 preguntas)"},
